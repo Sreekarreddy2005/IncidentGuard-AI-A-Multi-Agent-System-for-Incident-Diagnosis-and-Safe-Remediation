@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: agentops
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+      
+    - name: Set up Python
+      run: uv python install 3.12
+      
+    - name: Install dependencies
+      run: uv sync
+      
+    - name: Check code formatting
+      run: uv run ruff format --check src tests
+      
+    - name: Lint code
+      run: uv run ruff check src tests
+      
+    - name: Type checking
+      run: uv run pyright src tests
+      
+    - name: Run trajectory evaluations
+      run: uv run pytest tests/evaluation -v
