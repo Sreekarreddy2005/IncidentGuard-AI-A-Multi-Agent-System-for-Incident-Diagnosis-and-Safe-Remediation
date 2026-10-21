@@ -1,4 +1,4 @@
-# 🤖 AgentOps: Mini Agentic AI Platform
+# 🤖 IncidentGuard AI: A Multi-Agent System for Incident Diagnosis and Safe Remediation
 
 > **A deterministic, bounds-checked agentic workflow platform for safe production incident analysis, automated root-cause investigation, and policy-gated remediation.**
 
