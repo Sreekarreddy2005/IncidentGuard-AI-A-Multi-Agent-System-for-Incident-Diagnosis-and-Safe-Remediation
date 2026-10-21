@@ -31,9 +31,14 @@ def init_db():
     Base.metadata.create_all(bind=engine)
 
 
+# Auto-create tables on import
+init_db()
+
+
 def append_event(
     run_id: str, trace_id: str, message_type: str, created_at: str, payload_dict: dict
 ):
+    init_db()
     with SessionLocal() as session:
         event = EventLog(
             run_id=run_id,
